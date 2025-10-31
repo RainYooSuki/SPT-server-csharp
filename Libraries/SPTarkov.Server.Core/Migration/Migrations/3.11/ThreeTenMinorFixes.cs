@@ -11,16 +11,6 @@ namespace SPTarkov.Server.Core.Migration.Migrations;
 [Injectable]
 public class ThreeTenMinorFixes : AbstractProfileMigration
 {
-    public override string FromVersion
-    {
-        get { return new("~3.10"; }
-    }
-
-    public override string ToVersion
-    {
-        get { return "3.11"; }
-    }
-
     public override string MigrationName
     {
         get { return "ThreeTenMinorFixes-SPTSharp"; }

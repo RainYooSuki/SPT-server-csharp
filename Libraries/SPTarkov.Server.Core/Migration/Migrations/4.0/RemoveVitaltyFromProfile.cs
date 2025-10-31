@@ -6,16 +6,6 @@ namespace SPTarkov.Server.Core.Migration.Migrations;
 [Injectable]
 public class RemoveVitaltyFromProfile : AbstractProfileMigration
 {
-    public override string FromVersion
-    {
-        get { return "~4.0"; }
-    }
-
-    public override string ToVersion
-    {
-        get { return "~4.0"; }
-    }
-
     public override string MigrationName
     {
         get { return "RemoveVitaltyFromProfile400"; }

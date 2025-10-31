@@ -11,16 +11,6 @@ namespace SPTarkov.Server.Core.Migration.Migrations;
 [Injectable]
 public class BuyRestrictionMaxStringToInt : AbstractProfileMigration
 {
-    public override string FromVersion
-    {
-        get { return "~4.0"; }
-    }
-
-    public override string ToVersion
-    {
-        get { return "~4.0"; }
-    }
-
     public override string MigrationName
     {
         get { return "BuyRestrictionMaxStringToInt400"; }
