@@ -5,9 +5,9 @@ using SPTarkov.Server.Core.Models.Spt.Server;
 namespace SPTarkov.Server.Core.Servers;
 
 [Injectable(InjectionType.Singleton)]
-public class DatabaseServer
+public sealed class DatabaseServer
 {
-    protected DatabaseTables? TableData { get; private set; }
+    private DatabaseTables? TableData { get; set; }
 
     /// <summary>
     /// Gets the database tables.

@@ -8,14 +8,14 @@ using SPTarkov.Server.Core.Services;
 namespace SPTarkov.Server.Core.Servers;
 
 [Injectable(InjectionType.Singleton)]
-public class HttpServer(
+public sealed class HttpServer(
     ConfigServer configServer,
     WebSocketServer webSocketServer,
     ProfileActivityService profileActivityService,
     IEnumerable<IHttpListener> httpListeners
 )
 {
-    protected readonly HttpConfig HttpConfig = configServer.GetConfig<HttpConfig>();
+    private readonly HttpConfig HttpConfig = configServer.GetConfig<HttpConfig>();
 
     public async Task HandleRequest(HttpContext context, RequestDelegate next)
     {

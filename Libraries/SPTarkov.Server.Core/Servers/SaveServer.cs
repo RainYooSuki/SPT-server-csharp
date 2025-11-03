@@ -16,7 +16,7 @@ using LogLevel = SPTarkov.Server.Core.Models.Spt.Logging.LogLevel;
 namespace SPTarkov.Server.Core.Servers;
 
 [Injectable(InjectionType.Singleton)]
-public class SaveServer(
+public sealed class SaveServer(
     FileUtil fileUtil,
     IEnumerable<SaveLoadRouter> saveLoadRouters,
     JsonUtil jsonUtil,
