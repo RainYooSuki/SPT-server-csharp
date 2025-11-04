@@ -486,8 +486,8 @@
           "_tpl": "67d0576f29f580ebc10efd08",
           "upd": {
             "Repairable": {
-              "Durability": 82,
-              "MaxDurability": 88
+              "Durability": 100,
+              "MaxDurability": 100
             }
           }
         },
