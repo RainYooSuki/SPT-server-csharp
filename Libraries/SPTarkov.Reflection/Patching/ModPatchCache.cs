@@ -3,6 +3,7 @@ namespace SPTarkov.Reflection.Patching;
 /// <summary>
 ///     Cache of active patches for mod developers to use for compatibility reasons
 /// </summary>
+[Obsolete("Patches are injectable through IEnumerable<IRuntimePatch> now, this will be removed in 4.2.0")]
 public static class ModPatchCache
 {
     private static readonly List<AbstractPatch> _activePatches = [];
@@ -22,6 +23,7 @@ public static class ModPatchCache
     /// <remarks>
     ///     This should never be called before PreSptLoad is completed, otherwise could be empty.
     /// </remarks>
+    [Obsolete("Patches are injectable through IEnumerable<IRuntimePatch> now, this will be removed in 4.2.0")]
     public static IReadOnlyList<AbstractPatch> GetActivePatches()
     {
         // We're not exposing _activePatches so it cant be altered outside of this class. Do NOT implement this as a property.
@@ -38,6 +40,7 @@ public static class ModPatchCache
     /// <remarks>
     ///     This should never be called before PreSptLoad is completed, otherwise could be empty.
     /// </remarks>
+    [Obsolete("Patches are injectable through IEnumerable<IRuntimePatch> now, this will be removed in 4.2.0")]
     public static List<string> GetActivePatchedMethodNames()
     {
         var result = new List<string>();
