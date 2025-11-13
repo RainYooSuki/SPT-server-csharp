@@ -1,7 +1,4 @@
-using SPTarkov.Server.Core.Models.Logging;
-using LogLevel = SPTarkov.Server.Core.Models.Spt.Logging.LogLevel;
-
-namespace SPTarkov.Server.Core.Models.Utils;
+namespace SPTarkov.Common.Models.Logging;
 
 public interface ISptLogger<T>
 {
@@ -14,5 +11,4 @@ public interface ISptLogger<T>
     void Critical(string data, Exception? ex = null);
     void Log(LogLevel level, string data, LogTextColor? textColor = null, LogBackgroundColor? backgroundColor = null, Exception? ex = null);
     bool IsLogEnabled(LogLevel level);
-    void DumpAndStop();
 }

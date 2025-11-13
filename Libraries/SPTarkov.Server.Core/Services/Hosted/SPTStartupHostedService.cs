@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Hosting;
+using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Extensions;
 using SPTarkov.Server.Core.Loaders;
 using SPTarkov.Server.Core.Models.Spt.Logging;
 using SPTarkov.Server.Core.Models.Spt.Mod;
-using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Servers;
 using SPTarkov.Server.Core.Utils;
 using static SPTarkov.Server.Core.Extensions.StringExtensions;
@@ -115,6 +115,13 @@ public sealed class SPTStartupHostedService(
         }
         catch (Exception ex)
         {
+            // Thrown when we stop gracefully, we don't need to care for this
+            if (ex is OperationCanceledException)
+            {
+                logger.Info("Stopping server...");
+                return;
+            }
+
             logger.Critical("Critical exception, stopping server...", ex);
             throw;
         }
