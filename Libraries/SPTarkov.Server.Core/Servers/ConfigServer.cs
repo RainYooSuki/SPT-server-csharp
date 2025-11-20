@@ -5,10 +5,10 @@ using SPTarkov.Server.Core.Models.Spt.Config;
 namespace SPTarkov.Server.Core.Servers;
 
 [Injectable(InjectionType.Singleton)]
-[Obsolete("This class will be removed in SPT 4.2 in favor for directly injecting the configuration into classes")]
+[Obsolete("This class will be removed in a future version of SPT in favor for directly injecting the configuration into classes")]
 public class ConfigServer(IReadOnlyDictionary<Type, BaseConfig> configs)
 {
-    [Obsolete("This method will be removed in SPT 4.2 in favor for directly injecting the configuration into classes")]
+    [Obsolete("This method will be removed in a future version of SPT in favor for directly injecting the configuration into classes")]
     public T GetConfig<T>()
         where T : BaseConfig
     {
