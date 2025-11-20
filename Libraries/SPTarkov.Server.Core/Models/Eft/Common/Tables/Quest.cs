@@ -274,6 +274,12 @@ public record QuestCondition
         set { _conditionType = string.Intern(value); }
     }
 
+    [JsonPropertyName("epicGamesId")]
+    public string? EpicGamesId { get; set; }
+
+    [JsonPropertyName("steamGamesId")]
+    public string? SteamGamesId { get; set; }
+
     [JsonPropertyName("areaType")]
     public HideoutAreas? AreaType { get; set; }
 

@@ -3104,7 +3104,7 @@ public record SkillsSettings
     public WeaponSkills Revolver { get; set; }
 
     [JsonPropertyName("SMG")]
-    public IEnumerable<object> SMG { get; set; }
+    public WeaponSkills SMG { get; set; }
 
     [JsonPropertyName("Assault")]
     public WeaponSkills Assault { get; set; }
@@ -3116,16 +3116,16 @@ public record SkillsSettings
     public WeaponSkills Sniper { get; set; }
 
     [JsonPropertyName("LMG")]
-    public IEnumerable<object> LMG { get; set; }
+    public WeaponSkills LMG { get; set; }
 
     [JsonPropertyName("HMG")]
-    public IEnumerable<object> HMG { get; set; }
+    public WeaponSkills HMG { get; set; }
 
     [JsonPropertyName("Launcher")]
-    public IEnumerable<object> Launcher { get; set; }
+    public WeaponSkills Launcher { get; set; }
 
     [JsonPropertyName("AttachedLauncher")]
-    public IEnumerable<object> AttachedLauncher { get; set; }
+    public WeaponSkills AttachedLauncher { get; set; }
 
     [JsonPropertyName("Melee")]
     public MeleeSkill Melee { get; set; }
