@@ -93,6 +93,21 @@ public class LocationLifecycleService(
                 : playerProfile.CharacterData.ScavData.Skills.Common
         );
 
+        var transitionType = TransitionType.NONE;
+
+        if (request.TransitionType is TransitionType flags)
+        {
+            if (flags.HasFlag(TransitionType.COMMON))
+            {
+                transitionType = TransitionType.COMMON;
+            }
+
+            if (flags.HasFlag(TransitionType.EVENT))
+            {
+                transitionType = TransitionType.EVENT;
+            }
+        }
+
         // Raid is starting, adjust run times to reduce server load while player is in raid
         RagfairConfig.RunIntervalSeconds = RagfairConfig.RunIntervalValues.InRaid;
         HideoutConfig.RunIntervalSeconds = HideoutConfig.RunIntervalValues.InRaid;
@@ -104,7 +119,7 @@ public class LocationLifecycleService(
             ServerSettings = databaseService.GetLocationServices(), // TODO - is this per map or global?
             Profile = new ProfileInsuredItems { InsuredItems = playerProfile.CharacterData.PmcData.InsuredItems },
             LocationLoot = GenerateLocationAndLoot(sessionId, request.Location, !request.ShouldSkipLootGeneration ?? true),
-            TransitionType = request.TransitionType,
+            TransitionType = transitionType,
             Transition = new Transition
             {
                 TransitionType = request.TransitionType,
@@ -128,7 +143,7 @@ public class LocationLifecycleService(
         if (transitionData is not null)
         {
             logger.Success($"Player: {sessionId} is in transit to {request.Location}");
-            result.Transition.TransitionType = request.TransitionType;
+            result.Transition.TransitionType = transitionType;
             result.Transition.TransitionRaidId = transitionData.TransitionRaidId;
             result.Transition.TransitionCount += 1;
 
