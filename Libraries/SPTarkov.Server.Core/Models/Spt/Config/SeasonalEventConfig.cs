@@ -47,8 +47,8 @@ public record SeasonalEventConfig : BaseConfig
     [JsonPropertyName("hostilitySettingsForEvent")]
     public required Dictionary<string, Dictionary<string, List<AdditionalHostilitySettings>>> HostilitySettingsForEvent { get; set; }
 
-    [JsonPropertyName("khorvodEventTransitWhitelist")]
-    public required Dictionary<string, List<int>> KhorvodEventTransitWhitelist { get; set; }
+    [JsonPropertyName("khorovodEventTransitWhitelist")]
+    public required Dictionary<string, List<int>> KhorovodEventTransitWhitelist { get; set; }
 
     /// <summary>
     ///     Ids of containers on locations that only have Christmas loot

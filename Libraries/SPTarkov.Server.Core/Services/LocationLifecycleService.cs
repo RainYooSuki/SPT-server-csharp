@@ -116,23 +116,36 @@ public class LocationLifecycleService(
         var location = GenerateLocationAndLoot(sessionId, request.Location, !request.ShouldSkipLootGeneration ?? true);
         var isRundansActive = databaseService.GetGlobals().Configuration.RunddansSettings.Active;
 
-        // Handle Runddans / Khorovod event
-        if (transitionType == TransitionType.EVENT && isRundansActive)
+        if (transitionType == TransitionType.EVENT)
         {
-            // TODO - wire up this first part to EnableKhorvodEvent in Seasonal config + move isRundansActive check to below block
-            if (location.Transits != null)
+            // Handle Runddans / Khorovod event
+            if (isRundansActive && location.Transits is not null)
             {
                 // Get whitelist for maps transits, event should have 1 only
-                var matchingTransitWhitelist = SeasonalEventConfig.KhorvodEventTransitWhitelist?.GetValueOrDefault(location.Id, null);
-                if (matchingTransitWhitelist != null)
-                {
-                    location.Transits = location.Transits.Where(transit => matchingTransitWhitelist.Contains(transit.Id.Value)).ToList();
-                }
+                var matchingTransitWhitelist = SeasonalEventConfig.KhorovodEventTransitWhitelist.GetValueOrDefault(
+                    location.Id.ToLowerInvariant(),
+                    []
+                );
 
                 foreach (var transits in location.Transits)
                 {
-                    transits.ActivateAfterSeconds = 300;
-                    transits.Events = true;
+                    if (transits.Id is null)
+                    {
+                        continue;
+                    }
+
+                    // ActivateAfterSeconds sets the timer on the generator, events is needed because it is checked again in the client
+                    // To enable certain stuff for the Khorovod event
+                    if (matchingTransitWhitelist.Contains(transits.Id.Value))
+                    {
+                        transits.ActivateAfterSeconds = 20;
+                        transits.Events = true;
+                    }
+                    else
+                    {
+                        // Disable the other transits in this event, people are only allowed to transit to certain points
+                        transits.IsActive = false;
+                    }
                 }
             }
         }

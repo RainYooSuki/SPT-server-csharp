@@ -14000,7 +14000,7 @@
       ]
     }
   },
-  "khorvodEventTransitWhitelist": {
+  "khorovodEventTransitWhitelist": {
     "shoreline": [
       24
     ],
@@ -14013,11 +14013,11 @@
     "woods": [
       15
     ],
-    "factory4_day": [
-      13
-    ],
     "bigmap": [
       11
+    ],
+    "interchange": [
+
     ]
   }
 }
