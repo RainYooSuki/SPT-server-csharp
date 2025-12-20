@@ -58,6 +58,7 @@ public class LocationLifecycleService(
     protected readonly PmcConfig PMCConfig = configServer.GetConfig<PmcConfig>();
     protected readonly BotConfig BotConfig = configServer.GetConfig<BotConfig>();
     protected readonly LostOnDeathConfig LostOnDeathConfig = configServer.GetConfig<LostOnDeathConfig>();
+    protected readonly SeasonalEventConfig SeasonalEventConfig = configServer.GetConfig<SeasonalEventConfig>();
 
     protected const string Pmc = "pmc";
     protected const string Savage = "savage";
@@ -118,7 +119,18 @@ public class LocationLifecycleService(
         // Handle Runddans / Khorovod event
         if (transitionType == TransitionType.EVENT && isRundansActive)
         {
-            foreach (var transits in location.Transits ?? [])
+            // TODO - wire up this first part to EnableKhorvodEvent in Seasonal config + move isRundansActive check to below block
+            if (location.Transits != null)
+            {
+                // Get whitelist for maps transits, event should have 1 only
+                var matchingTransitWhitelist = SeasonalEventConfig.KhorvodEventTransitWhitelist?.GetValueOrDefault(location.Id, null);
+                if (matchingTransitWhitelist != null)
+                {
+                    location.Transits = location.Transits.Where(transit => matchingTransitWhitelist.Contains(transit.Id.Value)).ToList();
+                }
+            }
+
+            foreach (var transits in location.Transits)
             {
                 transits.ActivateAfterSeconds = 300;
                 transits.Events = true;
