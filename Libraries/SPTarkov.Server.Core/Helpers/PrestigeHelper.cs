@@ -156,6 +156,7 @@ public class PrestigeHelper(
         newPmcStats.Eft.CarriedQuestItems = [];
         newPmcStats.Eft.FoundInRaidItems = [];
         newPmcStats.Eft.LastSessionDate = 0;
+        newPmcStats.Eft.DroppedItems = [];
 
         // TODO: find evidence scav stats are copied over in live
         //var newScavStats = newProfile.CharacterData.ScavData.Stats;
